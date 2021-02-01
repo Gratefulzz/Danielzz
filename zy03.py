@@ -6,18 +6,19 @@ Created on Mon Feb 01 21:15:12 2021
 """
 
 #课程作业3
-
 import pandas as pd
 import numpy as np
 
 carBrandProDType = np.dtype({'names': ['brand', 'typenum', 'pronum', 'ave'],
-                                 'formats': ['U32', 'i', 'i', 'f']})
+                             'formats': ['U32', 'i', 'i', 'f']})
 carModelProDType = np.dtype({'names': ['model', 'pronum'],
-                                 'formats': ['U32', 'i']})
+                             'formats': ['U32', 'i']})
 carBrandPro = []
 carModelPro = []
 carData = pd.read_csv(U"D:/工作/数字化/Python/2 作业/d1/L1(1)/L1/car_data_analyze/car_complain.csv")
-carDataTmp = carData.set_index(['brand', 'car_model'])['problem'].str.rstrip(',').str.split(',', expand=True).stack().reset_index(-1, drop=True).reset_index(name="problem")
+carDataTmp = carData.set_index(['brand', 'car_model'])['problem'].str.rstrip(',').str.split(',',
+                                                                                            expand=True).stack().reset_index(
+    -1, drop=True).reset_index(name="problem")
 carBrand = carDataTmp.groupby('brand')
 
 for brandName, brandData in carBrand:
